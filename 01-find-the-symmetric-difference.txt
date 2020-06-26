@@ -1,0 +1,27 @@
+function sym(...args) {
+  let arrays = [...args];
+  let rest = arrays.slice(2);
+  let result = diff(arrays[0], arrays[1]);
+  if (rest.length == 0) {
+    return result;
+  } else {
+    return sym(result, ...rest);
+  }
+}
+
+function diff(a,b) {
+  let setA = new Set(a);
+  let setB = new Set(b);
+  let result = new Set();
+  setA.forEach((el) => {
+    if (!setB.has(el)) result.add(el);
+  });
+  setB.forEach((el) => {
+    if (!setA.has(el)) result.add(el);
+  });
+  console.log(Array.from(result));
+  return Array.from(result);
+}
+
+console.clear();
+sym([1, 2, 3], [5, 2, 1, 4], [7, 8]);
