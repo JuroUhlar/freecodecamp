@@ -1,0 +1,24 @@
+function mergeSortedArrays(a, b) {
+  let result = [];
+  while (a.length && b.length) {
+    if (a[0] < b[0]) {
+      result.push(a.shift());
+    } else {
+      result.push(b.shift());
+    }
+  }
+  return [...result, ...a, ...b];
+}
+
+function mergeSort(array) {
+  if (array.length <= 1) {
+    return array;
+  }
+
+  const halfIndex = Math.ceil(array.length / 2);  
+  const firstHalf = array.slice(0, halfIndex);
+  const secondHalf = array.slice(halfIndex);
+  return mergeSortedArrays(mergeSort(firstHalf), mergeSort(secondHalf));
+}
+
+console.log(mergeSort([3,1,2,5,11,-1,7]))

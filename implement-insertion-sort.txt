@@ -1,0 +1,19 @@
+function insertionSort(array) {
+  // Start with second element, first is sorted implicitly
+  for (let i = 1; i<array.length; i++) {
+    let current = array[i];
+    let j = i-1;
+    // Run through the sorted array backwards, 
+    // Shift elements to the right until you find one
+    // that is smaller than current element
+    while((j >= 0) && array[j] > current) {
+      array[j+1] = array[j];
+      j--;
+    }
+    // Then put the current element in the empty place
+    array[j+1] = current;
+  }
+  return array;
+}
+
+console.log(insertionSort([4,1,3,8,2]));

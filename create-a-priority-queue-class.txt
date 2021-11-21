@@ -1,0 +1,42 @@
+function PriorityQueue () {
+  this.collection = [];
+  this.printCollection = function() {
+    console.log(this.collection);
+  };
+  // Only change code below this line
+  
+  this.enqueue = function(element) {
+    let targetIndex = this.collection.findIndex(el => el[1] > element[1]);
+    if (targetIndex === -1) {
+      this.collection.push(element);
+    } else {
+      this.collection.splice(targetIndex, 0, element);
+
+    }
+  }
+
+  this.dequeue = function() {
+    return this.collection.shift()[0];
+  }
+
+  this.size = function() {
+    return this.collection.length;
+  }
+
+  this.front = function() {
+    return this.collection[0][0];
+  }
+
+  this.isEmpty = function() {
+    return this.collection.length === 0;
+  }
+
+  // Only change code above this line
+}
+
+// const q = new PriorityQueue();
+// q.enqueue([1,1]);
+// q.enqueue([2,2]);
+// console.log(q.collection[1]);
+
+
