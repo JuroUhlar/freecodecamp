@@ -1,0 +1,41 @@
+var displayTree = tree => console.log(JSON.stringify(tree, null, 2));
+function Node(value) {
+  this.value = value;
+  this.left = null;
+  this.right = null;
+}
+
+function BinarySearchTree() {
+  this.root = null;
+
+
+  this.remove = function (value) {
+    displayTree(this);
+    if (this.root === null) {
+      return null;
+    }
+    if (this.root.value === value && !this.root.left && !this.root.right) {
+      this.root = null;
+    }
+
+    let current = this.root; 
+    while (current) {
+      console.log(current.value);
+      if(current.left?.value === value && current.left.left === null && current.left.right === null) {
+        current.left = null;
+        return;
+      }
+      if (current.right?.value === value && current.right.left === null && current.right.right === null) {
+        current.right = null;
+        return;
+      }
+      if (value < current.value) {
+        current = current.left;
+      } else {
+        current = current.right;
+      }
+    }
+    return null;
+
+  }
+}
