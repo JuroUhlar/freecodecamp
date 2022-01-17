@@ -1,0 +1,32 @@
+var MaxHeap = function () {
+    // Only change code below this line
+    this.arr = [null];
+
+    this.getParentIndex = function (index) {
+        return Math.floor(index / 2);
+    }
+
+    this.swap = function (index1, index2) {
+      let copy = this.arr[index1];
+      this.arr[index1] = this.arr[index2];
+      this.arr[index2] = copy;
+    }
+  
+    this.insert = function (value) {
+      let index = this.arr.length;
+      this.arr.push(value);
+      let parentIndex = this.getParentIndex(index);
+      let parent = this.arr[parentIndex];
+      while (parent && parent < value) {
+        this.swap(index, parentIndex);
+        index = parentIndex;
+        parentIndex = this.getParentIndex(index);
+        parent = this.arr[parentIndex];
+      }
+    }
+  
+    this.print = function() {
+      return this.arr.slice(1);
+    }
+    // Only change code above this line
+  };

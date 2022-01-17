@@ -1,0 +1,65 @@
+var displayTree = tree => console.log(JSON.stringify(tree, null, 2));
+var Node = function () {
+  this.keys = new Map();
+  this.end = false;
+  this.setEnd = function () {
+    this.end = true;
+  };
+  this.isEnd = function () {
+    return this.end;
+  };
+};
+var Trie = function () {
+  // Only change code below this line
+  this.root = new Node();
+
+  this.add = function (word) {
+    let currentNode = this.root;
+    let chars = [...word];
+    chars.forEach((char, index) => {
+      if (currentNode.keys.has(char)) {
+        currentNode = currentNode.keys.get(char);
+      } else {
+        let newNode = new Node();
+        currentNode.keys.set(char, newNode);
+        currentNode = newNode;
+      }
+      if (index === chars.length - 1) {
+        currentNode.setEnd();
+      }
+    })
+  }
+
+  this.isWord = function (word) {
+    let currentNode = this.root;
+    let chars = [...word];
+    for (const [index, char] of chars.entries()) {
+      if (index === chars.length - 1
+        && currentNode.keys.has
+        && currentNode.keys.get(char)?.end) {
+        return true;
+      }
+      if (currentNode.keys.has(char)) {
+        currentNode = currentNode.keys.get(char);
+      } else {
+        return false;
+      }
+    }
+    return false;
+  }
+
+  this.print = function (node = this.root, chars = "") {
+    let results = [];
+    for (const [key, val] of node.keys) {
+      if (val.isEnd()) {
+        results.push(chars + key);
+      }
+      results = [...results, ...this.print(val, chars + key)]
+    };
+
+    return results;
+  }
+
+  // Only change code above this line
+};
+
